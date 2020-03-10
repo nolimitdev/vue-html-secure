@@ -36,7 +36,7 @@ function safeHTML(htmlString) {
             var attribute = attributes[j];
 
             // Remove insecure attributes starting "on*" (e.g.: onload, onerror, ...) and also values starting "javascript:*" (e.g. href="javascript:alert(1)")
-            if (attribute.name.indexOf('on') == 0 || attribute.value.indexOf('javascript:') == 0)
+            if (attribute.name.indexOf('on') == 0 || attribute.value.toLowerCase().indexOf('javascript:') == 0)
                 element.removeAttribute(attribute.localName);
         }
     }
