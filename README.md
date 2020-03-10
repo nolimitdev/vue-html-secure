@@ -23,10 +23,11 @@ This leaves all HTML tags except for &lt;script&gt; and removes insecure element
 ### v-html-escape="..." or $escapeHTML(...)
 
 This replaces chars `<`, `>`, `$` to appropriate HTML entities `&lt;`, `&gt;`, `&amp;`. This does not escape single or double quotes for string usage in HTML attribute (it is not aim of this plugin to do that).
+Note that in case `v-html-escape` you can directly use official `v-text`, but using function can have sense e.g. `message : 'My <b>secure part</b> and user-provided insecure part: ' + this.$escapeHTML(...)`.
 
 ### v-html-remove="..." or $removeHTML(...)
 
-This removes all HTML tags but preserves it's text content. Note that in case `v-html-remove` you can directly use official `v-text`, but using function can have sense e.g. `message : 'My <b>secure part</b> and user-provided insecure part: ' + this.$removeHTML(...)`.
+This removes all HTML tags but preserves it's text content.
 
 ## Usage
 

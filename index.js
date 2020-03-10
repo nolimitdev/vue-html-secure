@@ -5,6 +5,11 @@ var div = doc.createElement('div');
 
 function removeHTML(htmlString) {
     div.innerHTML = htmlString;
+    var elements = div.querySelectorAll('*')
+    while (elements.length) {
+        div.innerHTML = div.innerText;
+        elements = div.querySelectorAll('*');
+    }
     return div.innerText;
 }
 
@@ -21,11 +26,16 @@ function safeHTML(htmlString) {
     div.innerHTML = htmlString;
 
     for (var elements = div.querySelectorAll('*'), i = elements.length - 1; i >= 0; i--) {
-        var element = elements[i];
+        var element = elements[i],
+            tagName = element.localName;
 
-        // This is not needed because .innerHTML by default does not execute script tags
-        if (element.localName == 'script') {
-            element.parentNode.removeChild(element);
+        if (tagName == 'script' || tagName == 'noscript' || tagName == 'noembed' || !(element.attributes instanceof NamedNodeMap)) {
+            try {
+                element.parentNode.removeChild(element);
+            }
+            catch(e) {
+                element.outerHTML = '';
+            }
             continue;
         }
 
@@ -33,11 +43,20 @@ function safeHTML(htmlString) {
             continue;
 
         for (var attributes = element.attributes, j = attributes.length - 1; j >= 0; j--) {
-            var attribute = attributes[j];
+            var attribute = attributes[j],
+                attributeName = attribute.localName;
 
-            // Remove insecure attributes starting "on*" (e.g.: onload, onerror, ...) and also values starting "javascript:*" (e.g. href="javascript:alert(1)")
-            if (attribute.name.indexOf('on') == 0 || attribute.value.toLowerCase().indexOf('javascript:') == 0)
-                element.removeAttribute(attribute.localName);
+            // Remove insecure attribute starting "on*" (example: <img src='' onerror=alert(1)>)
+            if (attribute.name.indexOf('on') == 0)
+                element.removeAttribute(attributeName);
+
+            // Remove insecure attribute with value starting "javascript:*" (example: href="javascript:alert(1)")
+            else if (attribute.value.toLowerCase().trim().indexOf('javascript:') == 0)
+                element.removeAttribute(attributeName);
+
+            // For non-specific tags remove insecure src/data attribute with value starting "data:*" (example: <embed src="data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==">)
+            else if (['audio', 'image', 'img', 'source', 'video'].indexOf(tagName) == -1 && (attributeName == 'src' || attributeName == 'data') && attribute.value.toLowerCase().trim().indexOf('data:') == 0)
+                element.removeAttribute(attributeName);
         }
     }
 
