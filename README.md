@@ -72,7 +72,7 @@ new Vue({
     el: '#app',
     data: {
         message : 'My <b>secure part</b> and user-provided insecure part: ' +
-                   this.$safeHTML("<img src='' onerror=alert('XSS!')>"),
+                   this.$escapeHTML("<h1>Foo</h1>"),
     },
 });
 ```
