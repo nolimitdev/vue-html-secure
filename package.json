@@ -1,6 +1,6 @@
 {
   "name": "vue-html-secure",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Vue.js 2.x plugin to add HTML secure directives v-html-remove, v-html-escape, v-html-safe",
   "main": "index.js",
   "scripts": {
