@@ -18,7 +18,7 @@ yarn add vue-html-secure
 
 ### v-html-safe="..." or $safeHTML(...)
 
-This leaves all HTML tags except for <script> and remove insecure elements's attributes starting "on*" and also values starting "javascript:*".
+This leaves all HTML tags except for &lt;script&gt; and remove insecure elements's attributes starting "on*" and also values starting "javascript:*".
 
 ### v-html-escape="..." or $escapeHTML(...)
 
