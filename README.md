@@ -26,7 +26,7 @@ This replaces chars `<`, `>`, `$` to appropriate HTML entities `&lt;`, `&gt;`, `
 
 ### v-html-remove="..." or $removeHTML(...)
 
-This removes all HTML tags but preserves it's text content. Note that in case `v-html-remove` you can directly use official `v-text`. But using function can have sense e.g. `message : 'My <b>secure part</b> and user-provided insecure part: ' + this.$removeHTML(...)`.
+This removes all HTML tags but preserves it's text content. Note that in case `v-html-remove` you can directly use official `v-text`, but using function can have sense e.g. `message : 'My <b>secure part</b> and user-provided insecure part: ' + this.$removeHTML(...)`.
 
 ## Usage
 
@@ -78,7 +78,7 @@ new Vue({
 ```
 
 ```html
-<!-- node official v-html here -->
+<!-- note official v-html here -->
 <div v-html="message"></div>
 ```
 
