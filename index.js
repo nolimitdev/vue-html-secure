@@ -44,7 +44,7 @@ function safeHTML(htmlString) {
     return div.innerHTML;
 }
 
-// Export as VUE.js plugin with attributes v-html-remove, v-html-escape, v-html-safe
+// Export as VUE.js plugin with directives v-html-remove, v-html-escape, v-html-safe
 // Usage example: 
 // import VueSecureHTML from 'VueSecureHTML.js';
 // Vue.use(VueSecureHTML);

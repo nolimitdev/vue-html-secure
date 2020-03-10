@@ -1,0 +1,27 @@
+{
+  "name": "vue-html-secure",
+  "version": "1.0.0",
+  "description": "Vue.js 2.x plugin to add HTML secure directives v-html-remove, v-html-escape, v-html-safe",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nolimitdev/vue-html-secure"
+  },
+  "keywords": [
+    "vue",
+    "xss",
+    "v-html",
+    "v-html-remove",
+    "v-html-escape",
+    "v-html-safe"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nolimitdev/vue-html-secure/issues"
+  },
+  "homepage": "https://github.com/nolimitdev/vue-html-secure"
+}
