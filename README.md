@@ -1,6 +1,6 @@
 # vue-html-secure [![](https://img.shields.io/npm/v/vue-html-secure.svg)](https://www.npmjs.com/package/vue-html-secure)
 
-Vue.js plugin to add HTML secure directives `v-html-remove`, `v-html-escape`, `v-html-safe` which are secure alternatives to official `v-html`. Using official `v-html` can easily lead to XSS attacks and must be used on trusted content only and never on user-provided content. Most popular JavaScript libraries to sanitize HTML string are too huge (from several tens of kB to several MB) with lot of dependencies. This plugin is lightweight (only 2kB packed size). The main feature is to secure HTML string to avoid XSS attacks such as `<img src='' onerror=alert('XSS!')>` or `<a href="javascript:alert('XSS!')"></a>`.
+Vue.js plugin to add HTML secure directives `v-html-remove`, `v-html-escape`, `v-html-safe` which are secure alternatives to official `v-html`. Using official `v-html` can easily lead to XSS attacks and must be used on trusted content only and never on user-provided content. Most popular JavaScript libraries to sanitize HTML string are too huge (from several hundred KB to several MB) with lot of dependencies. This plugin is lightweight (only 2kB packed size) without dependency. The main feature is to secure HTML string to avoid XSS attacks such as `<img src='' onerror=alert('XSS!')>` or `<a href="javascript:alert('XSS!')"></a>`.
 
 ## Install
 
@@ -14,11 +14,11 @@ npm install --save vue-html-secure
 yarn add vue-html-secure
 ```
 
-## Directives anf functions
+## Directives and functions
 
 ### v-html-safe="..." or $safeHTML(...)
 
-This leaves all HTML tags except for &lt;script&gt; and remove insecure elements's attributes starting "on*" and also values starting "javascript:*".
+This leaves all HTML tags except for &lt;script&gt; and removes insecure elements's attributes starting "on*" and also values starting "javascript:*".
 
 ### v-html-escape="..." or $escapeHTML(...)
 
