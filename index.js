@@ -44,18 +44,19 @@ function safeHTML(htmlString) {
 
         for (var attributes = element.attributes, j = attributes.length - 1; j >= 0; j--) {
             var attribute = attributes[j],
-                attributeName = attribute.localName;
+                attributeName = attribute.localName,
+                attributeValue = attribute.value.replace(/[\u0000-\u0020\u00A0\u1680\u180E\u2000-\u2029\u205f\u3000]/g, '').toLowerCase().trim();
 
             // Remove insecure attribute starting "on*" (example: <img src='' onerror=alert(1)>)
-            if (attribute.name.indexOf('on') == 0)
+            if (attributeName.indexOf('on') == 0)
                 element.removeAttribute(attributeName);
 
-            // Remove insecure attribute with value starting "javascript:*" (example: href="javascript:alert(1)")
-            else if (attribute.value.toLowerCase().trim().indexOf('javascript:') == 0)
+            // Remove insecure src/href attribute with value starting "javascript:*" (example: href="javascript:alert(1)")
+            else if ((attributeName == 'src' || attributeName == 'href') && attributeValue.indexOf('javascript:') == 0)
                 element.removeAttribute(attributeName);
 
             // For non-specific tags remove insecure src/data attribute with value starting "data:*" (example: <embed src="data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==">)
-            else if (['audio', 'image', 'img', 'source', 'video'].indexOf(tagName) == -1 && (attributeName == 'src' || attributeName == 'data') && attribute.value.toLowerCase().trim().indexOf('data:') == 0)
+            else if (['audio', 'image', 'img', 'source', 'video'].indexOf(tagName) == -1 && (attributeName == 'src' || attributeName == 'data') && attributeValue.indexOf('data:') == 0)
                 element.removeAttribute(attributeName);
         }
     }
