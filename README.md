@@ -34,6 +34,8 @@ This removes all HTML tags but preserves it's text content. Note that in case `v
 import Vue from 'vue';
 import VueSecureHTML from 'vue-html-secure';
 
+Vue.use(VueSecureHTML);
+
 // Optional
 // Vue.prototype.$safeHTML = VueSecureHTML.safeHTML;
 // Vue.prototype.$escapeHTML = VueSecureHTML.escapeHTML;
