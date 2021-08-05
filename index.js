@@ -5,12 +5,7 @@ var div = doc.createElement('div');
 
 function removeHTML(htmlString) {
     div.innerHTML = htmlString;
-    var elements = div.querySelectorAll('*')
-    while (elements.length) {
-        div.innerHTML = div.innerText;
-        elements = div.querySelectorAll('*');
-    }
-    return div.innerText;
+    return div.textContent;
 }
 
 function escapeHTML(htmlString) {
