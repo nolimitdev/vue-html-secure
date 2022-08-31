@@ -70,40 +70,81 @@ function safeHTML(htmlString) {
 // Vue.use(VueSecureHTML);
 // <teplate><div v-html-remove="message"></div><div v-html-escape="message"></div><div v-html-safe="message"></div></teplate>
 
+// See directive hooks difference between Vue 2.x and Vue 3.x: https://v3-migration.vuejs.org/breaking-changes/custom-directives.html
+
 module.exports = {
     install : function (Vue, options) {
 
         Vue.directive('html-remove', {
+            // For Vue 2.x
             inserted : function (el, binding) {
                 el.innerHTML = removeHTML(binding.value);
             },
 
+            // For Vue 3.x
+            mounted : function (el, binding) {
+                el.innerHTML = removeHTML(binding.value);
+            },
+
+            // For Vue 2.x
             update : function (el, binding) {
                 if (binding.value !== binding.oldValue)
                     el.innerHTML = removeHTML(binding.value);
-            }
+            },
+
+            // For Vue 3.x
+            updated : function (el, binding) {
+                if (binding.value !== binding.oldValue)
+                    el.innerHTML = removeHTML(binding.value);
+            },
         });
 
         Vue.directive('html-escape', {
+            // For Vue 2.x
             inserted : function (el, binding) {
                 el.innerHTML = escapeHTML(binding.value);
             },
 
+            // For Vue 3.x
+            mounted : function (el, binding) {
+                el.innerHTML = escapeHTML(binding.value);
+            },
+
+            // For Vue 2.x
             update : function (el, binding) {
                 if (binding.value !== binding.oldValue)
                     el.innerHTML = escapeHTML(binding.value);
-            }
+            },
+
+            // For Vue 3.x
+            updated : function (el, binding) {
+                if (binding.value !== binding.oldValue)
+                    el.innerHTML = escapeHTML(binding.value);
+            },
         });
 
         Vue.directive('html-safe', {
+            // For Vue 2.x
             inserted : function (el, binding) {
                 el.innerHTML = safeHTML(binding.value);
             },
 
+            // For Vue 3.x
+            mounted : function (el, binding) {
+                el.innerHTML = safeHTML(binding.value);
+            },
+
+            // For Vue 2.x
             update : function (el, binding) {
                 if (binding.value !== binding.oldValue)
                     el.innerHTML = safeHTML(binding.value);
-            }
+            },
+
+            // For Vue 3.x
+            updated : function (el, binding) {
+                if (binding.value !== binding.oldValue)
+                    el.innerHTML = safeHTML(binding.value);
+            },
         });
 
     }

@@ -32,6 +32,8 @@ This removes all HTML tags but preserves it's text content.
 ## Usage
 
 ```js
+////////// JS for Vue 2.x \\\\\\\\\\
+
 import Vue from 'vue';
 import VueSecureHTML from 'vue-html-secure';
 
@@ -42,12 +44,37 @@ Vue.use(VueSecureHTML);
 // Vue.prototype.$escapeHTML = VueSecureHTML.escapeHTML;
 // Vue.prototype.$removeHTML = VueSecureHTML.removeHTML;
 
-new Vue({
+const App = new Vue({
     el: '#app',
-    data: {
-        message : "Hello <img src='' onerror=alert('XSS!')> VUE",
+    data() {
+        return {
+            message : "Hello <img src='' onerror=alert('XSS!')> VUE",
+        }
     },
 });
+```
+
+```js
+////////// JS for Vue 3.x \\\\\\\\\\
+
+import * as Vue from 'vue';
+import VueSecureHTML from 'vue-html-secure';
+
+const App = Vue.createApp({
+    data() {
+        return {
+            message : "Hello <img src='' onerror=alert('XSS!')> VUE",
+        }
+    },
+});
+
+// Optional
+App.config.globalProperties.$safeHTML = VueSecureHTML.safeHTML;
+App.config.globalProperties.$escapeHTML = VueSecureHTML.escapeHTML;
+App.config.globalProperties.$removeHTML = VueSecureHTML.removeHTML;
+
+App.use(VueSecureHTML);
+App.mount('#app');
 ```
 
 Example 01
@@ -69,11 +96,12 @@ Example 02
 Example 03
 
 ```js
-new Vue({
-    el: '#app',
-    data: {
-        message : 'My <b>secure part</b> and user-provided insecure part: ' +
-                   this.$escapeHTML("<h1>Foo</h1>"),
+new Vue({ // or Vue.createApp({
+    data() {
+        return {
+            message : 'My <b>secure part</b> and user-provided insecure part: ' +
+                       this.$escapeHTML("<h1>Foo</h1>"),
+        }
     },
 });
 ```
@@ -83,6 +111,6 @@ new Vue({
 <div v-html="message"></div>
 ```
 
-> Note 1: This is for **Vue.js 2.x** only.
+> Note 1: This is for **Vue.js 2.x** and **Vue.js 3.x**.
 
 > Note 2: In future releases will be added whitelist and blacklist of HTML tags.
